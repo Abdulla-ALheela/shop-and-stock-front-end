@@ -2,34 +2,33 @@ import { useContext, useEffect, useState } from 'react';
 
 import { UserContext } from '../../contexts/UserContext';
 
-import * as userService from '../../services/userService'
+import * as listService from "../../services/listService";
 
-const Dashboard = () => {
+const Dashboard = (props) => {
+
   const { user } = useContext(UserContext);
 
-  const [listOfUsers, setListOfUsers] = useState([])
+  const [lists, setLists] = useState([]);
 
   useEffect(() => {
-    const fetchUsers = async () => {
-        try {
-            const fetchedUsers = await userService.index()
-            setListOfUsers(fetchedUsers)
-        } catch (err) {
-            console.log(err)
-        }
-    }
-
-    if (user) fetchUsers()
-  }, [user])
+    const fetchAllLists = async () => {
+      const listsData = await listService.index();
+  
+      setLists(listsData)
+    
+    };
+    if (user) fetchAllLists();
+  }, [user]);
+  
 
   return (
     <main>
       <h1>Welcome, {user.username}</h1>
       <p>
-        This is the dashboard page where you can see a list of all the users.
+        This is the dashboard page where you can see all lists.
       </p>
-      {listOfUsers.map((userObj) => (
-        <h4>{userObj.username}</h4>
+      {lists.map((list) => (
+        <p key={list._id}>{list.title}</p>
       ))}
     </main>
   );
