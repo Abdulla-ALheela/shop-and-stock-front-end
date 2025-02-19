@@ -1,9 +1,10 @@
-import { Link } from 'react-router'
+import { useParams, Link } from 'react-router'
 import { useContext } from 'react'
 import { UserContext } from '../../contexts/UserContext'
 
 const NavBar = () => {
 	const { user, setUser } = useContext(UserContext)
+	const { listId, taskId } = useParams();
 
 	const handleSignOut = () => {
 		localStorage.removeItem('token')
@@ -17,6 +18,7 @@ const NavBar = () => {
 					<li><Link to="/" onClick={handleSignOut}>Sign Out</Link></li>
 					<li><Link to="/">Dashboard</Link></li>
 					<li><Link to='/lists/new'>New List</Link></li>
+					<Link to={`/lists/${listId}/tasks/${taskId}/edit`}>Edit Task</Link>
 				</ul>
 			) : (
 				<ul>

@@ -7,6 +7,7 @@ import SignInForm from './components/SignInForm/SignInForm'
 import Dashboard from './components/Dashboard/Dashboard'
 import { UserContext } from './contexts/UserContext'
 import ListForm from './components/ListForm/ListForm';
+import EditTaskForm from './components/EditTaskForm/EditTaskForm';
 
 const App = () => {
 
@@ -20,6 +21,7 @@ const App = () => {
         <Route path='/sign-in' element={<SignInForm />} />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/lists/new' element={<ListForm />} />
+        <Route path="/lists/:listId/tasks/:taskId/edit" element={<EditTaskForm />} />
       </Routes>
     </>
   )
