@@ -1,7 +1,5 @@
-import { Routes, Route, useNavigate } from 'react-router';
+import { Routes, Route, useNavigate} from 'react-router';
 import { useContext, useState, useEffect} from 'react';
-import { Routes, Route } from 'react-router'
-import { useContext, useEffect, useState } from 'react';
 import NavBar from './components/NavBar/NavBar'
 import SignUpForm from './components/SignUpForm/SignUpForm'
 import Landing from './components/Landing/Landing'
@@ -29,6 +27,14 @@ const App = () => {
       if (user) fetchAllLists();
     }, [user]);
 
+    const navigate = useNavigate();
+    
+    const handleAddList = async (listFormData) => {
+      const newList = await listService.create(listFormData);
+      setLists([newList, ...lists]);
+      navigate('/');
+    };
+
   return (
     <>
       <NavBar />
@@ -36,7 +42,7 @@ const App = () => {
         <Route path='/' element={user ? <Dashboard lists={lists}/> : <Landing />} />
         <Route path='/sign-in' element={<SignInForm />} />
         <Route path='/sign-up' element={<SignUpForm />} />
-        <Route path='/lists/new' element={<ListForm />} />
+      <Route path='/lists/new' element={<ListForm handleAddList={handleAddList} />} />
         <Route path='/lists/inventory' element={<InventoryLists lists={lists} />} />
         <Route path='/lists/purchase' element={<PurchaseLists lists={lists} />} />
       </Routes>
