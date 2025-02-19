@@ -4,6 +4,7 @@ import { UserContext } from '../../contexts/UserContext';
 const Dashboard = (props) => {
 
   const { user } = useContext(UserContext); 
+const threeLists =props.lists.slice(0,3)
 
   return (
     <main>
@@ -11,7 +12,7 @@ const Dashboard = (props) => {
       <p>
         This is the dashboard page where you can see all lists.
       </p>
-      {props.lists.map((list) => (
+      {threeLists.map((list) => (
         <p key={list._id}>{list.title}</p>
       ))}
     </main>
