@@ -1,10 +1,12 @@
 import { useState } from 'react';
 
+
 const ListForm = (props) => {
   const [formData, setFormData] = useState({
     title: "",
-    listType: "",
+    listType: "Purchase list",
   });
+
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
@@ -12,6 +14,7 @@ const ListForm = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    props.handleAddList(formData);
 
   };
 
@@ -26,6 +29,8 @@ const ListForm = (props) => {
 >
           <option value='Inventory'>Inventory list</option>
           <option value='Purchase list'>Purchase List</option>
+          <option value="Purchase list">Purchase List</option>
+          <option value="Inventory">Inventory list</option>
 
         </select>
         <button type='submit'>SUBMIT</button>

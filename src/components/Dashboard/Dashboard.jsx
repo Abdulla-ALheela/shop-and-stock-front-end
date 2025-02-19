@@ -12,6 +12,7 @@ const Dashboard = (props) => {
         This is the dashboard page where you can see all lists.
       </p>
       {props.lists.map((list) => (
+      {props.lists.map((list) => (
         <p key={list._id}>{list.title}</p>
       ))}
     </main>
