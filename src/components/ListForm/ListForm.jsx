@@ -27,6 +27,8 @@ const ListForm = (props) => {
         <label htmlFor='listType'>List Type</label>
         <select required name='listType' id='listType' value={formData.listType} onChange={handleChange}
 >
+          <option value='Inventory'>Inventory list</option>
+          <option value='Purchase list'>Purchase List</option>
           <option value="Purchase list">Purchase List</option>
           <option value="Inventory">Inventory list</option>
 
