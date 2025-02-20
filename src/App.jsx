@@ -16,22 +16,24 @@ const App = () => {
   const { user } = useContext(UserContext);
   
     const [lists, setLists] = useState([]);
+    const [listAdded, setListAdded] = useState(false);
   
     useEffect(() => {
       const fetchAllLists = async () => {
         const listsData = await listService.index();
     
         setLists(listsData)
-      
+        setListAdded(false);
       };
       if (user) fetchAllLists();
-    }, [user]);
+    }, [user,listAdded]);
 
     const navigate = useNavigate();
     
     const handleAddList = async (listFormData) => {
       const newList = await listService.create(listFormData);
       setLists([newList, ...lists]);
+      setListAdded(true);
       navigate('/');
     };
 

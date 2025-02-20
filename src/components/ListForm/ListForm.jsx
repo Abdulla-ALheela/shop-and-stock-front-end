@@ -15,7 +15,6 @@ const ListForm = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     props.handleAddList(formData);
-
   };
 
   return (
