@@ -1,15 +1,25 @@
-const InventoryLists = (props) => {
- 
+import { Link } from 'react-router';
+
+const InventoryLists = ({ lists, handleDeleteList }) => {
   return (
-    <>
-<h1>inventory</h1>
-{
- props.lists.map((list) => (
-    list.listType === "Inventory" ?
-    <p key={list._id}>{list.title}</p> : null
-  )) 
-}
-  </>
+    <main>
+      {lists.filter(list => list.listType === "Inventory").map((list) => (
+        <article key={list._id}>
+          <header>
+            <Link to={`/lists/${list._id}`}>
+            <h2>{list.title}</h2></Link>
+            <Link to={`/lists/${list._id}/edit`}>
+            <button>Edit</button></Link>
+
+            <button onClick={() => handleDeleteList(list._id)}>Delete</button>
+          </header>
+        </article>
+      ))}
+      
+      {lists.filter(list => list.listType === "Inventory").length === 0 && (
+        <p>No inventory lists available</p>
+      )}
+    </main>
   );
 };
 
