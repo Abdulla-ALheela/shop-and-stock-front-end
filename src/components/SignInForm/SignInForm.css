@@ -1,0 +1,67 @@
+.sign-in-card {
+    background-color: black;
+    padding: 30px;
+    width: 350px;
+    text-align: center;
+    border-radius: 15px;
+    position: relative;
+    
+
+    border: 2px solid white; 
+    box-shadow: 
+        5px 5px 0px white,  
+        -5px -5px 0px rgba(0, 0, 0, 0.3); 
+}
+
+.sign-in-label {
+    display: block;
+    color: white;
+    font-size: 14px;
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.sign-in-input {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    outline: none;
+    margin-bottom: 30px;
+   
+}
+
+.sign-in-button {
+    width: 60%;
+    padding: 10px;
+    background-color: #0068FF;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.sign-in-button:hover {
+    background-color: #0460eae3;
+}
+
+.sign-in-text {
+    color: white;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.sign-in-link {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.sign-in-link:hover {
+    text-decoration: underline;
+}

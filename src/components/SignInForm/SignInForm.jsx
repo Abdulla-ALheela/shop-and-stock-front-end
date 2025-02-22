@@ -1,10 +1,9 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
-
 import { signIn } from '../../services/authService';
 import { Link } from 'react-router'
 import { UserContext } from '../../contexts/UserContext';
-
+import "./SignInForm.css"
 const SignInForm = () => {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
@@ -22,10 +21,7 @@ const SignInForm = () => {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     try {
-      // This function doesn't exist yet, but we'll create it soon.
-      // It will cause an error right now
       const signedInUser = await signIn(formData);
-
       setUser(signedInUser);
       navigate('/');
     } catch (err) {
@@ -34,13 +30,14 @@ const SignInForm = () => {
   };
 
   return (
-    <main>
+    <main className="sign-in-card">
       <h1>Sign In</h1>
       <p>{message}</p>
       <form autoComplete='off' onSubmit={handleSubmit}>
         <div>
-          <label htmlFor='email'>Username:</label>
+          <label className="sign-in-label" htmlFor='email'>Username</label>
           <input
+          className="sign-in-input"
             type='text'
             autoComplete='off'
             id='username'
@@ -51,8 +48,9 @@ const SignInForm = () => {
           />
         </div>
         <div>
-          <label htmlFor='password'>Password:</label>
+          <label className="sign-in-label" htmlFor='password'>Password</label>
           <input
+            className="sign-in-input"
             type='password'
             autoComplete='off'
             id='password'
@@ -63,8 +61,8 @@ const SignInForm = () => {
           />
         </div>
         <div>
-          <button>Sign In</button>
-          <p><Link to="/sign-up">Sign Up</Link></p>
+          <button className="sign-in-button">Sign In</button>
+          <p className="sign-in-text">No Account? <Link className="sign-in-link" to="/sign-up">Sign Up</Link></p>
         </div>
       </form>
     </main>

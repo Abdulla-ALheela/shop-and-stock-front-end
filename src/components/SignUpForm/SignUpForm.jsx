@@ -81,7 +81,7 @@ const SignUpForm = () => {
         </div>
         <div>
           <button className="sign-up-button " disabled={isFormInvalid()}>Sign Up</button>
-          <p className="sign-up-text">Already have an account? <Link className="sign-up-link" to="/sign-in"><b>Sign-In</b></Link></p>
+          <p className="sign-up-text">Already have an account? <Link className="sign-up-link" to="/sign-in"><b>Sign In</b></Link></p>
         </div>
       </form>
     </main>
