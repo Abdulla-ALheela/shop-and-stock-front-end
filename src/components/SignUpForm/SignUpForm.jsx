@@ -1,8 +1,9 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 import { signUp } from '../../services/authService'
-
+import { Link } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
+import "./SignUpForm.css"
 
 const SignUpForm = () => {
   const navigate = useNavigate();
@@ -38,13 +39,14 @@ const SignUpForm = () => {
   };
 
   return (
-    <main>
-      <h1>Sign Up</h1>
+    <main className="sign-up-card">
+      <h1 >Sign Up</h1>
       <p>{message}</p>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor='username'>Username:</label>
-          <input
+          <label className="sign-up-label" htmlFor='username'>Username</label>
+          <input 
+            className="sign-up-input"
             type='text'
             id='name'
             value={username}
@@ -54,8 +56,9 @@ const SignUpForm = () => {
           />
         </div>
         <div>
-          <label htmlFor='password'>Password:</label>
-          <input
+          <label className="sign-up-label" htmlFor='password'>Password</label>
+          <input 
+            className="sign-up-input"
             type='password'
             id='password'
             value={password}
@@ -65,8 +68,9 @@ const SignUpForm = () => {
           />
         </div>
         <div>
-          <label htmlFor='confirm'>Confirm Password:</label>
+          <label className="sign-up-label" htmlFor='confirm'>Confirm Password</label>
           <input
+            className="sign-up-input"
             type='password'
             id='confirm'
             value={passwordConf}
@@ -76,8 +80,8 @@ const SignUpForm = () => {
           />
         </div>
         <div>
-          <button disabled={isFormInvalid()}>Sign Up</button>
-          <button onClick={() => navigate('/')}>Cancel</button>
+          <button className="sign-up-button " disabled={isFormInvalid()}>Sign Up</button>
+          <p className="sign-up-text">Already have an account? <Link className="sign-up-link" to="/sign-in"><b>Sign-In</b></Link></p>
         </div>
       </form>
     </main>

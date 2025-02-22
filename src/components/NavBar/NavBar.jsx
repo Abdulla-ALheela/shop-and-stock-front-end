@@ -14,7 +14,7 @@ const NavBar = () => {
 		<nav>
 			{user ? (
 				<ul>
-					<li><Link to="/" onClick={handleSignOut}>Sign Out</Link></li>
+					<li><Link to="/sign-in" onClick={handleSignOut}>Sign Out</Link></li>
 					<li><Link to='/lists/inventory'>Inventory Lists</Link></li>
 					<li><Link to='/lists/purchase'>Purchase Lists</Link></li>
 					<li><Link to="/">Home</Link></li>
@@ -22,9 +22,7 @@ const NavBar = () => {
 				</ul>
 			) : (
 				<ul>
-					<li><Link to="/sign-up">Sign Up</Link></li>
-					<li><Link to="/sign-in">Sign In</Link></li>
-					<li><Link to="/">Home</Link></li>
+					
 				</ul>
 			)}
 		</nav>

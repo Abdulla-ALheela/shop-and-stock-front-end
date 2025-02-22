@@ -2,7 +2,7 @@ import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router';
 
 import { signIn } from '../../services/authService';
-
+import { Link } from 'react-router'
 import { UserContext } from '../../contexts/UserContext';
 
 const SignInForm = () => {
@@ -64,7 +64,7 @@ const SignInForm = () => {
         </div>
         <div>
           <button>Sign In</button>
-          <button onClick={() => navigate('/')}>Cancel</button>
+          <p><Link to="/sign-up">Sign Up</Link></p>
         </div>
       </form>
     </main>
