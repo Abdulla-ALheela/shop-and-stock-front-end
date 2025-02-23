@@ -1,21 +1,32 @@
-import { useContext} from 'react';
-import { UserContext } from '../../contexts/UserContext';
 
-const PurchaseLists = (props) => {
+import { Link } from 'react-router';
 
-  const { user } = useContext(UserContext); 
-
-    return (
-        <>
-        <h1>purchase</h1>
-        {
-         props.lists.map((list) => (
-            list.listType === "Purchase list" && list.owner._id === user._id ?
-            <p key={list._id}>{list.title}</p> : null
-          )) 
-        }
-          </>
-    );
+const PurchaseLists = ({ lists, handleDeleteList }) => {
+  return (
+    <main>
+      {lists.filter(list => list.listType === "Purchase list").map((list) => (
+        <article key={list._id}>
+          <header>
+            <Link to={`/lists/${list._id}`}><h2>{list.title}</h2></Link>
+            <Link to={`/lists/${list._id}/edit`}><button>Edit</button></Link>
+            <button onClick={() => handleDeleteList(list._id)}>Delete</button>
+          </header>
+        </article>
+      ))}
+      {lists.filter(list => list.listType === "Purchase list").length === 0 && (
+        <p>No inventory lists available</p>
+      )}
+    </main>
+  );
 };
 
 export default PurchaseLists;
+
+
+
+
+
+
+
+
+

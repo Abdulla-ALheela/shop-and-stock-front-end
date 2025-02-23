@@ -11,6 +11,7 @@ const index = async () => {
     }
   };
 
+ 
   const create = async (listFormData) => {
     try {
       const res = await fetch(BASE_URL, {
@@ -20,14 +21,47 @@ const index = async () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(listFormData),
+            });
+      return res.json();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const show = async (listId) => {
+    console.log("ListService Show listID: " + listId);
+    try {
+      const res = await fetch(`${BASE_URL}/${listId}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      });
+      return res.json(); 
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  
+  const deleteList = async (listId) => {
+    try {
+      const res = await fetch(`${BASE_URL}/${listId}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
       });
       return res.json();
     } catch (error) {
       console.log(error);
     }
   };
+
+
   
+
   export { 
+  
     index,
     create,
+    show,
+    deleteList,
   };

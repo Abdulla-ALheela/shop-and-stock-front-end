@@ -9,14 +9,30 @@ import ListForm from './components/ListForm/ListForm';
 import * as listService from './services/listService';
 import InventoryLists from './components/InventoryLists/InventoryLists';
 import PurchaseLists from './components/PurchaseLists/PurchaseLists';
+import ListDetails from './components/ListDetails/ListDetails';
+
+
 
 const App = () => {
 
   const { user } = useContext(UserContext);
+  const [lists, setLists] = useState([]);
+  const [listAdded, setListAdded] = useState(false);
+
+    const handleDeleteList = async (listId) => {
+      try {
+        await listService.deleteList(listId); 
+        setLists((prevLists) => prevLists.filter((list) => list._id !== listId)); 
+      } catch (error) {
+        console.error('Error deleting list:', error);
+      }
+    };
+
+   
   
-    const [lists, setLists] = useState([]);
-    const [listAdded, setListAdded] = useState(false);
-  
+
+
+
     useEffect(() => {
       const fetchAllLists = async () => {
         const listsData = await listService.index();
@@ -27,6 +43,7 @@ const App = () => {
       if (user) fetchAllLists();
     }, [user,listAdded]);
 
+
     const navigate = useNavigate();
     
     const handleAddList = async (listFormData) => {
@@ -36,6 +53,7 @@ const App = () => {
       navigate('/');
     };
 
+
   return (
     <>
       <NavBar />
@@ -43,10 +61,11 @@ const App = () => {
         <Route path='/' element={user ? <Dashboard lists={lists}/> : null} />
         <Route path='/sign-in' element={<SignInForm />} />
         <Route path='/sign-up' element={<SignUpForm />} />
-      <Route path='/lists/new' element={<ListForm handleAddList={handleAddList} />} />
-        <Route path='/lists/inventory' element={<InventoryLists lists={lists} />} />
-        <Route path='/lists/purchase' element={<PurchaseLists lists={lists} />} />
-      </Routes>
+        <Route path='/lists/new' element={<ListForm handleAddList={handleAddList} />} />
+        <Route path='/lists/inventory' element={<InventoryLists lists={lists} handleDeleteList={handleDeleteList}/>} />
+        <Route path='/lists/purchase' element={<PurchaseLists lists={lists} handleDeleteList={handleDeleteList} />} />
+        <Route path='/lists/:listId' element={<ListDetails handleDeleteList={handleDeleteList} />} />
+    </Routes>
     </>
   )
 }
