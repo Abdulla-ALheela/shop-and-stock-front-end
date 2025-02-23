@@ -1,3 +1,4 @@
+
 import { Link } from 'react-router';
 
 const PurchaseLists = ({ lists, handleDeleteList }) => {
