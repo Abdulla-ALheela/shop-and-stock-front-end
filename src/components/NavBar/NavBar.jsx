@@ -1,6 +1,8 @@
 import { Link } from 'react-router'
 import { useContext } from 'react'
 import { UserContext } from '../../contexts/UserContext'
+import styles from './NavBar.module.css';
+
 
 const NavBar = () => {
 	const { user, setUser } = useContext(UserContext)
@@ -11,7 +13,7 @@ const NavBar = () => {
 	}
 
 	return (
-		<nav>
+		<nav className={styles.container}>
 			{user ? (
 				<ul>
 					<li><Link to="/" onClick={handleSignOut}>Sign Out</Link></li>
