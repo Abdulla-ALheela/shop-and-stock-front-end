@@ -1,4 +1,4 @@
-import { useContext,useEffect} from 'react';
+import { useContext} from 'react';
 import { UserContext } from '../../contexts/UserContext';
 
 const Dashboard = (props) => {
@@ -9,9 +9,10 @@ const Dashboard = (props) => {
   props.lists.forEach(list => {
     list.owner._id === user._id ? userLists.push(list) : null
   });
+
+  let threeLists
     
-   const threeLists =userLists.slice(userLists.length - 3,userLists.length)
-   
+  userLists.length >= 3? threeLists =userLists.slice(userLists.length - 3,userLists.length):threeLists =userLists.slice(0,3)
 
   return (
     <main>

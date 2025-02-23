@@ -29,10 +29,6 @@ const App = () => {
     };
 
    
-  
-
-
-
     useEffect(() => {
       const fetchAllLists = async () => {
         const listsData = await listService.index();
