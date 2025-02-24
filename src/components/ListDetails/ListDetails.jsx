@@ -1,103 +1,107 @@
-//SRC/COMPONENTS/LISTDETAILS/LISTDETAILS.JSX
-
-import {useState, useEffect, useContext} from 'react'
-import { useParams, Link } from 'react-router'
+// src/components/ListDetails/ListDetails.jsx
+import { useState, useEffect, useContext } from 'react';
+import { useParams, Link } from 'react-router';
 import { UserContext } from '../../contexts/UserContext';
 import * as listService from '../../services/listService';
+import * as itemService from '../../services/ItemService';
 
-const ListDetails = (props) => {
-    const { listId } = useParams()
-    const { user } = useContext(UserContext)
-    const [list, setList] = useState(null)
+const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
+  const { listId } = useParams();
+  const { user } = useContext(UserContext);
+  const [list, setList] = useState(null);
 
-    useEffect(() => {
-        const fetchList = async () => {
-            try{
-                console.log("list id: " +listId)
-                const listData = await listService.show(listId)
-                setList (listData)
-            } catch (error) {
-                console.error("Error fetching list:", error)
-            }
-        }
-        fetchList()
-    }, [listId])
-    
-    if (!list) return <main>Loading...</main>
+  useEffect(() => {
+    const fetchList = async () => {
+      console.log('Fetching list with listId:', listId);
+      try {
+        const listData = await listService.show(listId);
+        setList(listData);
+      } catch (error) {
+        console.error('Error fetching list:', error);
+      }
+    };
 
+    if (listId) {
+      fetchList();
+    }
+  }, [listId]);
 
-//CHANGE OF INPUTS
-    const handleChange = (itemId, field, value) => {
-        const updatedItems = list.items.map
-        (item => item._id === itemId ? 
-        {...item, [field]: value } : item )
-         setList(prevList => ({
-            ...prevList,
-            items: updatedItems
-         }))
-        }
+  if (!list) return <main>Loading...</main>;
 
-//DELETE ITEM
-         const handleDeleteItem = async (itemId) => {
-            try {
-              await listService.deleteList(listId, itemId); // Assuming you have a deleteItem function
-              // Remove item from state
-              const updatedItems = list.items.filter(item => item._id !== itemId);
-              setList((prevList) => ({
-                ...prevList,
-                items: updatedItems,
-              }));
-            } catch (error) {
-              console.error('Error deleting item:', error);
-            }
-          }
+  const handleCheck = async (itemData) => {
+   await itemService.updateItem(listId, itemData._id, itemData);
+  }
 
-          
+  const handleDeleteItemInternal = async (itemId) => {
+    try {
+      await handleDeleteItem(listId, itemId);
+      setList((prevList) => ({
+        ...prevList,
+        items: prevList.items.filter((item) => item._id !== itemId),
+      }));
+    } catch (error) {
+      console.error('Error deleting item:', error);
+    }
+  };
 
-    return (
-        <main>
-            <section>
-                <header>
-                    <h1>{list.title}</h1>
-                    <h3>{list.listType}</h3>
-                    
-                    <div>
-                    <ul>
-                        {list.items.map(item => (
-                            <li key={item._id}>
-                        
-                        <label>
-                            <input 
-                            type="checkbox"
-                            checked={item.purchased}
-                            onChange={() => handleChange(item._id, 'purchased', !item.purchased)}
-                            />
-                            {item.name}
-                        </label>
-                        <button onClick = {() => handleDeleteItem (item._id)}>Delete</button>
-                        <Link to = {`/lists/${listId}/items/${item._id}/edit`}>Edit</Link>
-                        </li>
-                        ))}
-                      </ul>
-                      </div>
+  return (
+    <main>
+      <section>
+        <header>
+          <h1>{list.title}</h1>
+          <h3>{list.listType}</h3>
+          <div>
+            <ul>
+              {list.items.map((item) => (
+                <li key={item._id}>
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={item.isPurchased}
+                      onClick={() => handleCheck(item)}
+                      onChange={() =>
+                        setList((prevList) => ({
+                          ...prevList,
+                          items: prevList.items.map((i) =>
+                            i._id === item._id
+                              ? { ...i, isPurchased: !i.isPurchased }
+                              : i
+                          ),
+                        }))
+                      }
+                    />
+                    {/* Display item name, quantity, and unit */}
+                    <span>{item.name}</span> - <span>{item.quantity}</span> <span>{item.unit}</span>
+                  </label>
 
+                  {/* Edit Item Button */}
+                  <Link to={`/lists/${listId}/items/edit/${item._id}`}>
+                    <button>Edit Item</button>
+                  </Link>
 
-              <Link to={`/lists/${list._id}/edit`}>
-              <button>Edit</button></Link>
+                  {/* Delete Item Button */}
+                  <button onClick={() => handleDeleteItemInternal(item._id)}>Delete Item</button>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-              <button onClick={() => props.handleDeleteList(listId)}>
-                Delete
-              </button>
+          {/* Add Item Button */}
+          <Link to={`/lists/${listId}/items/add`}>
+            <button>Add Item</button>
+          </Link>
 
+          {/* Edit List Button */}
+          <Link to={`/lists/${listId}/edit`}>
+            <button>Edit List</button>
+          </Link>
 
-              <Link to={`/lists/${list._id}/ItemForm`}>
-              <button>Add Item</button></Link>
+          {/* Delete List Button */}
+          <button onClick={() => handleDeleteList(listId)}>Delete List</button>
+        </header>
+      </section>
+    </main>
+  );
+};
 
-
-                </header>
-            </section>
-        </main>
-    )
-}
-
-export default ListDetails
+export default ListDetails;
