@@ -52,7 +52,7 @@ const App = () => {
 
   return (
     <>
-      {/* <NavBar /> */}
+      <NavBar />
       <Routes>
         <Route path='/' element={user ? <Dashboard lists={lists}/> : <SignUpForm />} />
         <Route path='/sign-in' element={<SignInForm />} />
