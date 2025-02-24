@@ -17,7 +17,7 @@ const PurchaseLists = (props) => {
         </article>
       ))}
       {props.lists.filter(list => list.listType === "Purchase list" && list.owner._id === user._id ).length === 0 && (
-        <p>No inventory lists available</p>
+        <p>No purchase lists available</p>
       )}
     </main>
   );
