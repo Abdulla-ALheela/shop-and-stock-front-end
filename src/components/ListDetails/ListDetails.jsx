@@ -28,6 +28,10 @@ const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
 
   if (!list) return <main>Loading...</main>;
 
+  const handleCheck = async (itemData) => {
+   await itemService.updateItem(listId, itemData._id, itemData);
+  }
+
   const handleDeleteItemInternal = async (itemId) => {
     try {
       await handleDeleteItem(listId, itemId);
@@ -54,6 +58,7 @@ const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
                     <input
                       type="checkbox"
                       checked={item.isPurchased}
+                      onClick={() => handleCheck(item)}
                       onChange={() =>
                         setList((prevList) => ({
                           ...prevList,
@@ -66,9 +71,7 @@ const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
                       }
                     />
                     {/* Display item name, quantity, and unit */}
-                    <span>{item.name}</span> -
-                    <span>{item.quantity}</span>
-                    <span>{item.unit}</span>
+                    <span>{item.name}</span> - <span>{item.quantity}</span> <span>{item.unit}</span>
                   </label>
 
                   {/* Edit Item Button */}
@@ -79,18 +82,22 @@ const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
                 {/* Delete Item Button */}
                 <button onClick={() => handleDeleteItemInternal(item._id)}>Delete Item</button>
 
+
                 </li>
               ))}
             </ul>
           </div>
+
           {/* Add Item Button */}
           <Link to={`/lists/${listId}/items/add`}>
             <button>Add Item</button>
           </Link>
+
           {/* Edit List Button */}
           <Link to={`/lists/${listId}/edit`}>
             <button>Edit List</button>
           </Link>
+
           {/* Delete List Button */}
           <button onClick={() => handleDeleteList(listId)}>Delete List</button>
         </header>

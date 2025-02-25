@@ -1,0 +1,74 @@
+:root{
+    --text-size:15px;
+}
+
+.edit-item-form-main {
+    margin-left: auto;
+    margin-right: 0;
+    width: fit-content; 
+    position: absolute;
+    left: 15px;
+    top:200px
+}
+
+.edit-item-submit-button {
+    width: 65%;
+    padding: 5px;
+    background-color: #0068FF;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-left:var(--text-size) ;
+    display: flex;
+    align-content: left;
+    align-items: left;
+    justify-content: center;
+    justify-items: left;
+}
+
+.edit-item-submit-button:hover {
+    background-color: #0460eae3;
+}
+
+.edit-item-form-label {
+    display: block;
+    color: white;
+    font-size: 14px;
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: bold;
+    margin-left:var(--text-size) ;
+    display: flex !important;
+    justify-content: flex-start !important;
+    left: 0;
+}
+
+.edit-item-form-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    outline: none;
+    margin-bottom: 30px;
+    margin-left:var(--text-size)  ;
+    text-align: left;
+    display: flex;
+    justify-content: flex-start !important;
+    left: 0 !important;
+   
+}
+
+.edit-item-form-title{
+    color: white;
+    margin-bottom: 20px;
+    margin-left:var(--text-size);
+    text-align: left;
+    display: flex;
+    justify-content: flex-start !important;
+    left: 0 !important;
+}

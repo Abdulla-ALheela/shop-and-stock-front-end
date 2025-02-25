@@ -28,8 +28,8 @@ const Dashboard = (props) => {
       <div className="dashboard-cards">
       {threeLists.map((list) => (
         <>
-        <p className="dashboard-card" key={list._id}>{`Title: ${list.title}`}<br></br>
-        {`Type:  ${list.listType === "Inventory" ? "Inventory List":"Purchase list"}`}</p>
+        <Link to={`/lists/${list._id}`}><p className="dashboard-card" key={list._id}>{`Title: ${list.title}`}<br></br>
+        {`Type:  ${list.listType === "Inventory" ? "Inventory List":"Purchase list"}`}</p></Link>
         </>
       ))}
         </div>
