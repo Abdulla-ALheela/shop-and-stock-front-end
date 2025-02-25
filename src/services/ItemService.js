@@ -41,14 +41,15 @@ const addItem = async (listId, itemData) => {
 
 const updateItem = async (listId, itemId, itemData) => {
   try {
-    const res = await fetch(`${BASE_URL}/${listId}/items`, {
-      method: 'POST',
+    const res = await fetch(`${BASE_URL}/${listId}/items/${itemId}`, {
+      method: 'PUT',
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(itemData),
     });
+
 
     return res.json();
   } catch (error) {

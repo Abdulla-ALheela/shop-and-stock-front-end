@@ -12,7 +12,6 @@ const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
 
   useEffect(() => {
     const fetchList = async () => {
-      console.log('Fetching list with listId:', listId);
       try {
         const listData = await listService.show(listId);
         setList(listData);
@@ -29,7 +28,8 @@ const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
   if (!list) return <main>Loading...</main>;
 
   const handleCheck = async (itemData) => {
-   await itemService.updateItem(listId, itemData._id, itemData);
+   const updatedItem = await itemService.updateItem(listId, itemData._id, itemData);
+   console.log(updatedItem)
   }
 
   const handleDeleteItemInternal = async (itemId) => {
