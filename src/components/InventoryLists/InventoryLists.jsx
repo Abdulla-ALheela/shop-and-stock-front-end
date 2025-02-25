@@ -13,8 +13,8 @@ const InventoryLists = (props) => {
             <Link to={`/lists/${list._id}`}>
             <h2>{list.title}</h2></Link>
             <Link to={`/lists/${list._id}/edit`}>
-            <button>Edit</button></Link>
-
+  <button>Edit List</button>
+</Link>
             <button onClick={() => props.handleDeleteList(list._id)}>Delete</button>
           </header>
         </article>
