@@ -19,7 +19,7 @@ const AddItemForm = () => {
     e.preventDefault();
     try {
       await itemService.addItem(listId, itemData);
-      navigate(`/lists/${listId}`); // Fixed template literals
+      navigate(`/lists/${listId}`);
     } catch (error) {
       console.error('Error adding item:', error);
     }
@@ -27,27 +27,38 @@ const AddItemForm = () => {
 
   return (
     <main className="item-form-main">
-    <form onSubmit={handleSubmit}>
-      <h1 className="item-form-title">Add Item</h1>
-      <label className="item-form-label">Name</label>
+      <form onSubmit={handleSubmit}>
+
+        <h1 className="item-form-title">Add Item</h1>
+
+        <label htmlFor='name' className="item-form-label">Name</label>
         <input
-        className="item-form-input"
+          required
+          name='name'
+          id='name'
+          className="item-form-input"
           type="text"
           value={itemData.name}
           onChange={(e) => setItemData({ ...itemData, name: e.target.value })}
         />
-    
-      <label className="item-form-label">Quantity</label>
+
+        <label htmlFor='quantity' className="item-form-label">Quantity</label>
         <input
-         className="item-form-input"
+          required
+          name='quantity'
+          id='quantity'
+          className="item-form-input"
           type="number"
           value={itemData.quantity}
           onChange={(e) => setItemData({ ...itemData, quantity: e.target.value })}
         />
-   
-      <label className="item-form-label">Unit</label>
+
+        <label htmlFor='unit' className="item-form-label">Unit</label>
         <select
-         className="item-form-input"
+          required
+          name='unit'
+          id='unit'
+          className="item-form-input"
           value={itemData.unit}
           onChange={(e) => setItemData({ ...itemData, unit: e.target.value })}
         >
@@ -59,9 +70,9 @@ const AddItemForm = () => {
           <option value="piece">piece</option>
           <option value="box">box</option>
         </select>
-     
-      <button className="submit-button" type="submit">Add Item</button>
-    </form>
+
+        <button className="submit-button" type="submit">Add Item</button>
+      </form>
     </main>
   );
 };
