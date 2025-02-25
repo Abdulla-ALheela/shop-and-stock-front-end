@@ -1,103 +1,113 @@
-//SRC/COMPONENTS/LISTDETAILS/LISTDETAILS.JSX
-
-import {useState, useEffect, useContext} from 'react'
-import { useParams, Link } from 'react-router'
+// src/components/ListDetails/ListDetails.jsx
+import { useState, useEffect, useContext } from 'react';
+import { useParams, Link } from 'react-router';
 import { UserContext } from '../../contexts/UserContext';
 import * as listService from '../../services/listService';
+import * as itemService from '../../services/ItemService';
 
-const ListDetails = (props) => {
-    const { listId } = useParams()
-    const { user } = useContext(UserContext)
-    const [list, setList] = useState(null)
-
-    useEffect(() => {
-        const fetchList = async () => {
-            try{
-                console.log("list id: " +listId)
-                const listData = await listService.show(listId)
-                setList (listData)
-            } catch (error) {
-                console.error("Error fetching list:", error)
-            }
-        }
-        fetchList()
-    }, [listId])
-    
-    if (!list) return <main>Loading...</main>
+import styles from './ListDetails.module.css'
+import editIcon from '../../assets/EDIT ICON.png';
+import deleteIcon from '../../assets/X ICON.png';
+import bgImage from '../../assets/NEW + EDIT ITEM.jpg';
 
 
-//CHANGE OF INPUTS
-    const handleChange = (itemId, field, value) => {
-        const updatedItems = list.items.map
-        (item => item._id === itemId ? 
-        {...item, [field]: value } : item )
-         setList(prevList => ({
-            ...prevList,
-            items: updatedItems
-         }))
-        }
 
-//DELETE ITEM
-         const handleDeleteItem = async (itemId) => {
-            try {
-              await listService.deleteList(listId, itemId); // Assuming you have a deleteItem function
-              // Remove item from state
-              const updatedItems = list.items.filter(item => item._id !== itemId);
-              setList((prevList) => ({
-                ...prevList,
-                items: updatedItems,
-              }));
-            } catch (error) {
-              console.error('Error deleting item:', error);
-            }
-          }
+const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
+  const { listId } = useParams();
+  const { user } = useContext(UserContext);
+  const [list, setList] = useState(null);
 
-          
+  useEffect(() => {
+    const fetchList = async () => {
+      console.log('Fetching list with listId:', listId);
+      try {
+        const listData = await listService.show(listId);
+        setList(listData);
+      } catch (error) {
+        console.error('Error fetching list:', error);
+      }
+    };
 
-    return (
-        <main>
-            <section>
-                <header>
-                    <h1>{list.title}</h1>
-                    <h3>{list.listType}</h3>
-                    
-                    <div>
-                    <ul>
-                        {list.items.map(item => (
-                            <li key={item._id}>
-                        
-                        <label>
-                            <input 
-                            type="checkbox"
-                            checked={item.purchased}
-                            onChange={() => handleChange(item._id, 'purchased', !item.purchased)}
-                            />
-                            {item.name}
-                        </label>
-                        <button onClick = {() => handleDeleteItem (item._id)}>Delete</button>
-                        <Link to = {`/lists/${listId}/items/${item._id}/edit`}>Edit</Link>
-                        </li>
-                        ))}
-                      </ul>
-                      </div>
+    if (listId) {
+      fetchList();
+    }
+  }, [listId]);
+
+  if (!list) return <main>Loading...</main>;
+
+  const handleCheck = async (itemData) => {
+   await itemService.updateItem(listId, itemData._id, itemData);
+  }
+
+  const handleDeleteItemInternal = async (itemId) => {
+    try {
+      await handleDeleteItem(listId, itemId);
+      setList((prevList) => ({
+        ...prevList,
+        items: prevList.items.filter((item) => item._id !== itemId),
+      }));
+    } catch (error) {
+      console.error('Error deleting item:', error);
+    }
+  };
+
+  return (    
+    <main className={styles.listdetails} style={{ backgroundImage: `url(${bgImage})` }}>
+      <section>
+        <header>
+          <h1 className={styles.listheader}>{list.title}</h1>
+          <h3 className={styles.listsubheader}>{list.listType}</h3>
+          <div className={styles.listcontainer}>
+            <ul className={styles.listitems}>
+              {list.items.map((item) => (
+                <li key={item._id} className={styles.listitem}>
+                  <label>
+                    <input
+                      type="checkbox"
+                      className={styles.listitemcheckbox}
+                      checked={item.isPurchased}
+                      onClick={() => handleCheck(item)}
+                      onChange={() =>
+                        setList((prevList) => ({
+                          ...prevList,
+                          items: prevList.items.map((i) =>
+                            i._id === item._id
+                              ? { ...i, isPurchased: !i.isPurchased }
+                              : i
+                          ),
+                        }))
+                      }
+                    />
+                    {/* Display item name, quantity, and unit */}
+                    <span className={styles.listitemname}>{item.name}</span> - <span>{item.quantity}</span> <span>{item.unit}</span>
+                  </label>
+
+                  {/* Edit Item Button */}
+                  <div className={styles.listbuttons}>
+                  <Link to={`/lists/${listId}/items/edit/${item._id}`}>
+                   <img src={editIcon} alt="Edit" className={styles.editIcon}/>
+                  </Link>
+
+                  {/* Delete Item Button */}
+                  <button type="button" onClick={() => handleDeleteItemInternal(item._id)} className={styles.deleteButton}>
+                      <img src={deleteIcon} alt="Delete" className={styles.deleteIcon} />
+                  </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Add Item Button */}
+          <Link to={`/lists/${listId}/items/add`}>
+            <button className={styles.additembutton}>Add Item</button>
+          </Link>
 
 
-              <Link to={`/lists/${list._id}/edit`}>
-              <button>Edit</button></Link>
+        </header>
+      </section>
+    </main>
+  );
+};
 
-              <button onClick={() => props.handleDeleteList(listId)}>
-                Delete
-              </button>
-
-
-              <Link to={`/lists/${list._id}/ItemForm`}>
-              <button>Add Item</button></Link>
-
-
-                </header>
-            </section>
-        </main>
-    )
-}
-
-export default ListDetails
+export default ListDetails;

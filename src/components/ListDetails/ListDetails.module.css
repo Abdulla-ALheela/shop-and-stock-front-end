@@ -1,0 +1,156 @@
+.listdetails {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 350px; 
+    max-width: 350px;
+    min-width: 280px;
+    padding: 20px; 
+    position: absolute;
+    left: 40px;
+    top: 90px;
+    border-radius: 8px;
+
+    background-size: cover; 
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100vw;
+    height: 100vh;
+}
+
+
+  .listheader {
+    text-align: left;
+    font-size: 60px;
+    font-weight: bold;
+    margin-bottom: 0px;
+  }
+  
+  .listsubheader {
+    text-align: left;
+    font-size: 25px;
+    font-weight:450;
+    font-weight: normal;
+    color: #ccc;
+    margin-bottom: 15px;
+  }
+  
+
+.listcontainer {
+    width: 180%;
+    max-width: 400px; 
+}
+  
+
+  .listitems {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .listitems li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #333;
+    font-size: 20px;
+    font-weight:350;
+  }
+  
+
+  .listitemcheckbox {
+    appearance: none;
+    width: 25px;
+    height: 25px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    margin-right: 10px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .listitemcheckbox:checked {
+    background: #0068FF; 
+    border-color: #0068FF;
+  }
+  
+  .listitemcheckbox:checked::after {
+    content: '✔';
+    font-size: 14px;
+    color: #000000;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .listitemname {
+    flex-grow: 1;
+    font-size: 20px;
+    font-weight:450;
+    color: #fff;
+  }
+  
+  .listbuttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .editIcon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.editIcon:hover {
+    content: url('../../assets/EDIT HOVER ICON.png');
+    transform: scale(1.1);
+}
+  
+  .listbuttons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .deleteButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.deleteButton img {
+    width: 20px; 
+    height: 20px;
+
+    
+}
+
+.deleteButton:hover img {
+    content: url('../../assets/X ICON HOVER.png');
+    transform: scale(1.2);
+}
+  
+  .additembutton {
+    background: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+    font-size: 16px;
+    padding: 10px 40px;
+    margin-top: 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .additembutton:hover {
+    background: #0068FF;
+    color: #000;
+  }
+  
