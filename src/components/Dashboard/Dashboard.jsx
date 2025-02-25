@@ -4,7 +4,7 @@ import "../Dashboard/Dashboard.css"
 import { Link } from 'react-router'
 const Dashboard = (props) => {
 
-  const { user } = useContext(UserContext); 
+  const { user } = useContext(UserContext);
   const userLists = [];
   
   props.lists.forEach(list => {

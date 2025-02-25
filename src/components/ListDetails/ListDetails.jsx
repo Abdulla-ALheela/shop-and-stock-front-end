@@ -3,6 +3,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useParams, Link } from 'react-router';
 import { UserContext } from '../../contexts/UserContext';
 import * as listService from '../../services/listService';
+import * as itemService from '../../services/ItemService';
 
 const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
   const { listId } = useParams();
@@ -70,10 +71,22 @@ const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
                     <span>{item.unit}</span>
                   </label>
 
+                  {/* Edit Item Button */}
+                  <Link to={`/lists/${listId}/items/edit/${item._id}`}>
+                      <button>Edit Item</button>
+                    </Link>
+
+                {/* Delete Item Button */}
+                <button onClick={() => handleDeleteItemInternal(item._id)}>Delete Item</button>
+
                 </li>
               ))}
             </ul>
           </div>
+          {/* Add Item Button */}
+          <Link to={`/lists/${listId}/items/add`}>
+            <button>Add Item</button>
+          </Link>
           {/* Edit List Button */}
           <Link to={`/lists/${listId}/edit`}>
             <button>Edit List</button>

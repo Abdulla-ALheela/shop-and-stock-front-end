@@ -10,7 +10,9 @@ import * as listService from './services/listService';
 import InventoryLists from './components/InventoryLists/InventoryLists';
 import PurchaseLists from './components/PurchaseLists/PurchaseLists';
 import ListDetails from './components/ListDetails/ListDetails';
-
+import ItemEditForm from './components/EditItemForm/EditItemForm';
+import * as itemService from './services/ItemService';
+import AddItemForm from './components/AddItemForm/AddItemForm';
 
 
 const App = () => {
@@ -19,16 +21,8 @@ const App = () => {
   const [lists, setLists] = useState([]);
   const [listAdded, setListAdded] = useState(false);
 
-    const handleDeleteList = async (listId) => {
-      try {
-        await listService.deleteList(listId); 
-        setLists((prevLists) => prevLists.filter((list) => list._id !== listId)); 
-      } catch (error) {
-        console.error('Error deleting list:', error);
-      }
-    };
 
-   
+   // Fetch all lists
     useEffect(() => {
       const fetchAllLists = async () => {
         const listsData = await listService.index();
@@ -39,7 +33,7 @@ const App = () => {
       if (user) fetchAllLists();
     }, [user,listAdded]);
 
-
+      // Handle Add List
     const navigate = useNavigate();
     
     const handleAddList = async (listFormData) => {
@@ -49,6 +43,51 @@ const App = () => {
       navigate('/');
     };
 
+  const handleDeleteList = async (listId) => {
+      try {
+        await listService.deleteList(listId); 
+        setLists((prevLists) => prevLists.filter((list) => list._id !== listId)); 
+      } catch (error) {
+        console.error('Error deleting list:', error);
+      }
+  };
+
+    // Handle Edit Item
+  const handleEditItem = async (listId, itemId, updatedItemData) => {
+    try {
+      const updatedItem = await itemService.updateItem(listId, itemId, updatedItemData);
+      setLists((prevLists) =>
+        prevLists.map((list) =>
+          list._id === listId
+            ? {
+                ...list,
+                items: list.items.map((item) =>
+                  item._id === itemId ? updatedItem : item
+                ),
+              }
+            : list
+        )
+      );
+    } catch (error) {
+      console.error('Error editing item:', error);
+    }
+  };
+
+    // Handle Delete Item
+  const handleDeleteItem = async (listId, itemId) => {
+    try {
+      await itemService.deleteItem(listId, itemId); 
+      setLists((prevLists) =>
+        prevLists.map((list) =>
+          list._id === listId
+            ? { ...list, items: list.items.filter((item) => item._id !== itemId) }
+            : list
+        )
+      );
+    } catch (error) {
+      console.error('Error deleting item:', error);
+    }
+  };
 
   return (
     <>
@@ -60,8 +99,16 @@ const App = () => {
         <Route path='/lists/new' element={<ListForm handleAddList={handleAddList} />} />
         <Route path='/lists/inventory' element={<InventoryLists lists={lists} handleDeleteList={handleDeleteList}/>} />
         <Route path='/lists/purchase' element={<PurchaseLists lists={lists} handleDeleteList={handleDeleteList} />} />
-        <Route path='/lists/:listId' element={<ListDetails handleDeleteList={handleDeleteList} />} />
-    </Routes>
+        <Route path='/lists/:listId' element={
+          <ListDetails
+            handleDeleteList={handleDeleteList}
+            handleDeleteItem={handleDeleteItem}
+            handleEditItem={handleEditItem}
+          />
+        } />
+        <Route path='/lists/:listId/items/add' element={<AddItemForm />} />
+        <Route path='/lists/:listId/items/edit/:itemId' element={<ItemEditForm />} />
+      </Routes>
     </>
   )
 }

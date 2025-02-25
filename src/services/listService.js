@@ -34,7 +34,7 @@ const index = async () => {
       const res = await fetch(`${BASE_URL}/${listId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
-      return res.json(); 
+      return res.json();
     } catch (error) {
       console.log(error);
     }
@@ -54,11 +54,9 @@ const index = async () => {
       console.log(error);
     }
   };
-
-
   
 
-  export { 
+  export {
   
     index,
     create,

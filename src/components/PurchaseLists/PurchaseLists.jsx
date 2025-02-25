@@ -3,7 +3,7 @@ import { useContext} from 'react';
 import { UserContext } from '../../contexts/UserContext';
 
 const PurchaseLists = (props) => {
-  const { user } = useContext(UserContext); 
+  const { user } = useContext(UserContext);
 
   return (
     <main>
