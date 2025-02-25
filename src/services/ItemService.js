@@ -40,7 +40,6 @@ const addItem = async (listId, itemData) => {
 };
 
 const updateItem = async (listId, itemId, itemData) => {
-try {
   try {
     const res = await fetch(`${BASE_URL}/${listId}/items`, {
       method: 'POST',
