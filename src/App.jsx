@@ -51,6 +51,8 @@ const App = () => {
     } catch (error) {
       console.error("Error editing list:", error);
     }
+
+    updatedData.listType === "Purchase list" ? navigate('/lists/purchase'): navigate('/lists/inventory')
   };
 
 

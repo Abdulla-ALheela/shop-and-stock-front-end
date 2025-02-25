@@ -5,7 +5,6 @@ import "../ListForm/ListForm.css"
 
 const ListForm = (props) => {
   const { listId } = useParams(); 
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({ title: "", listType: "Purchase list" });
 
   
@@ -32,8 +31,6 @@ const ListForm = (props) => {
      
       props.handleAddList(formData);
     }
-
-    navigate("/"); 
   };
 
   return (
