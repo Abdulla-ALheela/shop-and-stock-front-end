@@ -30,7 +30,7 @@ const SignUpForm = () => {
         setUser(newUser)
         navigate('/')
     } catch (err) {
-        setMessage(err.message)
+        setMessage("Login failed. Please check your username and password and try again")
     }
   };
 
