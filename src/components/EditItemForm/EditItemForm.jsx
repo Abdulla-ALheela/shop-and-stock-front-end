@@ -17,7 +17,6 @@ const ItemEditForm = () => {
 
 
   useEffect(() => {
-    console.log('Fetching item with ID:', itemId);
     const fetchItem = async () => {
       try {
         const item = await itemService.showItem(listId, itemId);
