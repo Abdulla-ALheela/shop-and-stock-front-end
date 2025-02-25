@@ -53,15 +53,6 @@ const App = () => {
     }
   };
 
-      // Handle Add List
-    const navigate = useNavigate();
-    
-    const handleAddList = async (listFormData) => {
-      const newList = await listService.create(listFormData);
-      setLists([newList, ...lists]);
-      setListAdded(true);
-      navigate('/');
-    };
 
 
 
