@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import * as listService from "../../services/listService";
+import "../ListForm/ListForm.css"
 
 const ListForm = (props) => {
   const { listId } = useParams(); 
@@ -36,12 +37,13 @@ const ListForm = (props) => {
   };
 
   return (
-    <main>
+    <main className="list-form-main">
       <form onSubmit={handleSubmit}>
-        <h1>{listId ? "Edit List" : "Create List"}</h1>
+        <h1 className="list-form-title">{listId ? "Edit List" : "Create List"}</h1>
 
-        <label htmlFor='title'>Title</label>
+        <label className="list-form-label" htmlFor='title'>Title</label>
         <input
+        className="list-form-input"
           required
           type='text'
           name='title'
@@ -50,8 +52,9 @@ const ListForm = (props) => {
           onChange={(e) => setFormData({ ...formData, title: e.target.value })}
         />
 
-        <label htmlFor='listType'>List Type</label>
+        <label className="list-form-label" htmlFor='listType'>List Type</label>
         <select
+        className="list-form-input"
           required
           name='listType'
           id='listType'
@@ -62,7 +65,7 @@ const ListForm = (props) => {
           <option value="Inventory">Inventory List</option>
         </select>
 
-        <button type='submit'>Save Changes</button>
+        <button className="submit-button" type='submit'>Save Changes</button>
       </form>
     </main>
   );

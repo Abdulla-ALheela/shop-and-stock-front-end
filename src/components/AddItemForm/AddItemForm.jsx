@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import * as itemService from '../../services/ItemService';
-
+import "../AddItemForm/AddItemForm.css"
 const AddItemForm = () => {
   const { listId } = useParams();
   const navigate = useNavigate();
@@ -19,31 +19,46 @@ const AddItemForm = () => {
     e.preventDefault();
     try {
       await itemService.addItem(listId, itemData);
-      navigate(`/lists/${listId}`); // Fixed template literals
+      navigate(`/lists/${listId}`);
     } catch (error) {
       console.error('Error adding item:', error);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h1>Add Item</h1>
-      <label>Name:
+    <main className="item-form-main">
+      <form onSubmit={handleSubmit}>
+
+        <h1 className="item-form-title">Add Item</h1>
+
+        <label htmlFor='name' className="item-form-label">Name</label>
         <input
+          required
+          name='name'
+          id='name'
+          className="item-form-input"
           type="text"
           value={itemData.name}
           onChange={(e) => setItemData({ ...itemData, name: e.target.value })}
         />
-      </label>
-      <label>Quantity:
+
+        <label htmlFor='quantity' className="item-form-label">Quantity</label>
         <input
+          required
+          name='quantity'
+          id='quantity'
+          className="item-form-input"
           type="number"
           value={itemData.quantity}
           onChange={(e) => setItemData({ ...itemData, quantity: e.target.value })}
         />
-      </label>
-      <label>Unit:
+
+        <label htmlFor='unit' className="item-form-label">Unit</label>
         <select
+          required
+          name='unit'
+          id='unit'
+          className="item-form-input"
           value={itemData.unit}
           onChange={(e) => setItemData({ ...itemData, unit: e.target.value })}
         >
@@ -55,9 +70,10 @@ const AddItemForm = () => {
           <option value="piece">piece</option>
           <option value="box">box</option>
         </select>
-      </label>
-      <button type="submit">Add Item</button>
-    </form>
+
+        <button className="submit-button" type="submit">Add Item</button>
+      </form>
+    </main>
   );
 };
 
