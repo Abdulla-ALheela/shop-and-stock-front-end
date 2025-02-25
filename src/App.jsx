@@ -36,7 +36,9 @@ const App = () => {
     const newList = await listService.create(listFormData);
     setLists([newList, ...lists]);
     setListAdded(true);
-    navigate('/');
+    console.log(listFormData);
+    listFormData.listType === "Purchase list" ? navigate('/lists/purchase'): navigate('/lists/inventory')
+    
   };
   const handleEditList = async (listId, updatedData) => {
     try {
