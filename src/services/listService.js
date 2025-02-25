@@ -80,11 +80,11 @@ const index = async () => {
   };
   
 
-  export { 
+  export {
     index,
     create,
     show,
     deleteList,
-    updateList 
+    updateList
   };
   

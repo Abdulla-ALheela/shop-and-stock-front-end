@@ -12,10 +12,7 @@ const PurchaseLists = (props) => {
         <article key={list._id}>
           <header>
             <Link to={`/lists/${list._id}`}><h2>{list.title}</h2></Link>
-            <Link to={`/lists/${list._id}/edit`}>
-  <button>Edit List</button>
-</Link>
-
+            <Link to={`/lists/${list._id}/edit`}> <button>Edit List</button></Link>
             <button onClick={() => props.handleDeleteList(list._id)}>Delete</button>
           </header>
         </article>
@@ -23,6 +20,12 @@ const PurchaseLists = (props) => {
       {props.lists.filter(list => list.listType === "Purchase list" && list.owner._id === user._id ).length === 0 && (
         <p>No inventory lists available</p>
       )}
+
+      {/* Add List Button */}
+      <Link to='/lists/new'>
+        <button>Add List</button>
+      </Link>
+
     </main>
   );
 };

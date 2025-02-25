@@ -3,7 +3,7 @@ import { useContext} from 'react';
 import { UserContext } from '../../contexts/UserContext';
 
 const InventoryLists = (props) => {
-  const { user } = useContext(UserContext); 
+  const { user } = useContext(UserContext);
   return (
     <main>
 
@@ -16,14 +16,19 @@ const InventoryLists = (props) => {
             <Link to={`/lists/${list._id}/edit`}>
   <button>Edit List</button>
 </Link>
-            <button onClick={() => props.handleDeleteList(list._id)}>Delete</button>
+            <button onClick={() => props.handleDeleteList(list._id)}>Delete List</button>
           </header>
         </article>
       ))}
       
       {props.lists.filter(list => list.listType === "Inventory" && list.owner._id === user._id).length === 0 && (
         <p>No inventory lists available</p>
+        
       )}
+
+      {/* Add List Button */}
+      <Link to='/lists/new'> <button>Add List</button> </Link>
+
     </main>
   );
 };

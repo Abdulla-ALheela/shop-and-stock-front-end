@@ -82,7 +82,6 @@ const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
                 {/* Delete Item Button */}
                 <button onClick={() => handleDeleteItemInternal(item._id)}>Delete Item</button>
 
-
                 </li>
               ))}
             </ul>
@@ -92,14 +91,6 @@ const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
           <Link to={`/lists/${listId}/items/add`}>
             <button>Add Item</button>
           </Link>
-
-          {/* Edit List Button */}
-          <Link to={`/lists/${listId}/edit`}>
-            <button>Edit List</button>
-          </Link>
-
-          {/* Delete List Button */}
-          <button onClick={() => handleDeleteList(listId)}>Delete List</button>
         </header>
       </section>
     </main>
