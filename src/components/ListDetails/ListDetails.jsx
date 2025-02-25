@@ -28,7 +28,7 @@ const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
   if (!list) return <main>Loading...</main>;
 
   const handleCheck = async (itemData) => {
-   const updatedItem = await itemService.updateItem(listId, itemData._id, itemData);
+   const updatedItem = await itemService.updateCheck(listId, itemData._id, itemData);
    console.log(updatedItem)
   }
 

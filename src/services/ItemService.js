@@ -50,6 +50,8 @@ const updateItem = async (listId, itemId, itemData) => {
       body: JSON.stringify(itemData),
     });
 
+    
+
 
     return res.json();
   } catch (error) {
@@ -58,6 +60,27 @@ const updateItem = async (listId, itemId, itemData) => {
   }
 };
 
+
+const updateCheck = async (listId, itemId, itemData) => {
+    try {
+      const res = await fetch(`${BASE_URL}/${listId}/items/${itemId}/check`, {
+        method: 'PUT',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(itemData),
+      });
+  
+      
+  
+  
+      return res.json();
+    } catch (error) {
+      console.log('Error adding item:', error);
+      throw error;
+    }
+  };
 
 
 
@@ -87,4 +110,5 @@ export {
     showItem,
     updateItem,
     deleteItem,
+    updateCheck
 };
