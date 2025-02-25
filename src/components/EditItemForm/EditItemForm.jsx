@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import * as itemService from '../../services/ItemService';
+
 import "../EditItemForm/EditItemForm.css"
 const ItemEditForm = () => {
   const { listId, itemId } = useParams();
@@ -14,7 +15,7 @@ const ItemEditForm = () => {
     isPurchased: false,
   });
 
-  // Fetch item data on component mount
+
   useEffect(() => {
     console.log('Fetching item with ID:', itemId);
     const fetchItem = async () => {
@@ -30,16 +31,25 @@ const ItemEditForm = () => {
 
 
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await itemService.updateItem(listId, itemId, itemData);
+      const res = await itemService.updateItem(listId, itemId, itemData);
+      if (!res) {
+        throw new Error('Failed to update item');
+      }
+
       navigate(`/lists/${listId}`);
     } catch (error) {
       console.error('Error updating item:', error);
+  
+      if (error.response) {
+        const errorText = await error.response.text();
+        console.error('Error response:', errorText);
+      }
     }
   };
+  
 
   return (
     <main className="edit-item-form-main">

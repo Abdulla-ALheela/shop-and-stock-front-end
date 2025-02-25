@@ -6,6 +6,7 @@ const InventoryLists = (props) => {
   const { user } = useContext(UserContext); 
   return (
     <main>
+
 <h1 >Inventory List</h1>
       {props.lists.filter(list => list.listType === "Inventory" && list.owner._id === user._id).map((list) => (
         <article key={list._id}>
