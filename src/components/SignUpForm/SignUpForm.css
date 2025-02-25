@@ -2,10 +2,12 @@
     background-color: black;
     padding: 30px;
     width: 350px;
-    text-align: center;
+    text-align: center !important;
     border-radius: 15px;
-    position: relative;
-    
+    position: absolute !important;
+    right:38%;
+    top: 15%;
+
 
     border: 2px solid white; 
     box-shadow: 

@@ -36,7 +36,19 @@ const App = () => {
     const newList = await listService.create(listFormData);
     setLists([newList, ...lists]);
     setListAdded(true);
-    navigate('/');
+    console.log(listFormData);
+    listFormData.listType === "Purchase list" ? navigate('/lists/purchase'): navigate('/lists/inventory')
+    
+  };
+  const handleEditList = async (listId, updatedData) => {
+    try {
+      const updatedList = await listService.updateList(listId, updatedData);
+      setLists((prevLists) =>
+        prevLists.map((list) => (list._id === listId ? updatedList : list))
+      );
+    } catch (error) {
+      console.error("Error editing list:", error);
+    }
   };
 
   // Handle Delete List
@@ -94,6 +106,7 @@ const App = () => {
         <Route path='/sign-in' element={<SignInForm />} />
         <Route path='/sign-up' element={<SignUpForm />} />
         <Route path='/lists/new' element={<ListForm handleAddList={handleAddList} />} />
+        <Route path="/lists/:listId/edit" element={<ListForm handleEditList={handleEditList} />} />
         <Route path='/lists/inventory' element={<InventoryLists lists={lists} handleDeleteList={handleDeleteList} />} />
         <Route path='/lists/purchase' element={<PurchaseLists lists={lists} handleDeleteList={handleDeleteList} />} />
         <Route
@@ -106,6 +119,8 @@ const App = () => {
             />
           }
         />
+        <Route path="/lists/:listId/edit" element={<ListForm />} />
+
         <Route path='/lists/:listId/items/add' element={<AddItemForm />} />
         <Route path='/lists/:listId/items/edit/:itemId' element={<ItemEditForm handleEditItem={handleEditItem} />} /> {/* Fixed props */}
       </Routes>

@@ -8,14 +8,14 @@ import * as itemService from '../../services/ItemService';
 import styles from './ListDetails.module.css'
 import editIcon from '../../assets/EDIT ICON.png';
 import deleteIcon from '../../assets/X ICON.png';
-import bgImage from '../../assets/NEW + EDIT ITEM.jpg';
-
+import bgImage from '../../assets/NEW_EDITITEM.jpg'
 
 
 const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
   const { listId } = useParams();
   const { user } = useContext(UserContext);
   const [list, setList] = useState(null);
+
 
   useEffect(() => {
     const fetchList = async () => {
@@ -51,8 +51,9 @@ const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
     }
   };
 
-  return (    
-    <main className={styles.listdetails} style={{ backgroundImage: `url(${bgImage})` }}>
+  return (
+    <div className={styles.listpagebg} style={{ backgroundImage: `url(${bgImage})` }}> 
+    <main className={styles.listdetails}> 
       <section>
         <header>
           <h1 className={styles.listheader}>{list.title}</h1>
@@ -97,16 +98,18 @@ const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
               ))}
             </ul>
           </div>
+          
 
           {/* Add Item Button */}
           <Link to={`/lists/${listId}/items/add`}>
             <button className={styles.additembutton}>Add Item</button>
           </Link>
 
-
+          
         </header>
       </section>
     </main>
+    </div>
   );
 };
 

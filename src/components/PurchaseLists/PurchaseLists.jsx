@@ -10,6 +10,7 @@ import bgImage from '../../assets/INV + PUR MAIN LIST.jpg'
 const PurchaseLists = (props) => {
   const { user } = useContext(UserContext); 
 
+
   return (
     <main className={styles.purchasePage} style={{ backgroundImage: `url(${bgImage})` }}> 
     <h1 className={styles.pageTitle}>Purchase List</h1>

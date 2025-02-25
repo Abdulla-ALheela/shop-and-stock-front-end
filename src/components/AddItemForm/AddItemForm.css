@@ -2,7 +2,7 @@
     --text-size:15px;
 }
 
-.list-form-main {
+.item-form-main {
     margin-left: auto;
     margin-right: 0;
     width: fit-content; 
@@ -11,8 +11,8 @@
     top:200px
 }
 
-.submit-button {
-    width: 65%;
+.item-submit-button {
+    width: 50%;
     padding: 5px;
     background-color: #0068FF;
     color: white;
@@ -29,11 +29,11 @@
     justify-items: left;
 }
 
-.submit-button:hover {
+.item-submit-button:hover {
     background-color: #0460eae3;
 }
 
-.list-form-label {
+.item-form-label {
     display: block;
     color: white;
     font-size: 14px;
@@ -46,7 +46,7 @@
     left: 0;
 }
 
-.list-form-input {
+.item-form-input {
     width: 100%;
     padding: 10px;
     border: 1px solid white;
@@ -63,7 +63,7 @@
    
 }
 
-.list-form-title{
+.item-form-title{
     color: white;
     margin-bottom: 20px;
     margin-left:var(--text-size);

@@ -4,6 +4,7 @@ import { signUp } from '../../services/authService'
 import { Link } from 'react-router'
 import { UserContext } from '../../contexts/UserContext'
 import "./SignUpForm.css"
+import bgImage from '../../assets/SIGNINANDUP.jpg'
 
 const SignUpForm = () => {
   const navigate = useNavigate();
@@ -39,6 +40,8 @@ const SignUpForm = () => {
   };
 
   return (
+         <div className="signinupbg" style={{ backgroundImage: `url(${bgImage})` }}> 
+    
     <main className="sign-up-card">
       <h1 >Sign Up</h1>
       <p>{message}</p>
@@ -85,6 +88,7 @@ const SignUpForm = () => {
         </div>
       </form>
     </main>
+    </div>
   );
 };
 

@@ -1,22 +1,21 @@
 import { useContext} from 'react';
 import { UserContext } from '../../contexts/UserContext';
-import "../Dashboard/Dashboard.css"
+import "./Dashboard.css"
 import { Link } from 'react-router'
-const Dashboard = (props) => {
+import bgImage from '../../assets/LANDING.jpg'
 
-  const { user } = useContext(UserContext); 
+
+const Dashboard = (props) => {
+  const { user } = useContext(UserContext);
   const userLists = [];
-  
   props.lists.forEach(list => {
     list.owner._id === user._id ? userLists.push(list) : null
   });
-
   let threeLists
-    
   userLists.length >= 3? threeLists =userLists.slice(userLists.length - 3,userLists.length):threeLists =userLists.slice(0,3)
-
   return (
-    <main >
+    <main className="landingpage" style={{backgroundImage: `url(${bgImage})`}}>
+      <div className="all-elements">
       <h1 className="text-title"><b>SHOP&STOCK</b></h1>
       <p className="text">
         This is the dashboard page where you can access all your lists.
@@ -28,13 +27,13 @@ const Dashboard = (props) => {
       <div className="dashboard-cards">
       {threeLists.map((list) => (
         <>
-        <p className="dashboard-card" key={list._id}>{`Title: ${list.title}`}<br></br>
-        {`Type:  ${list.listType === "Inventory" ? "Inventory List":"Purchase list"}`}</p>
+        <Link to={`/lists/${list._id}`}><p className="dashboard-card" key={list._id}>{`Title: ${list.title}`}<br></br>
+        {`Type:  ${list.listType === "Inventory" ? "Inventory List":"Purchase list"}`}</p></Link>
         </>
       ))}
+        </div>
         </div>
     </main>
   );
 };
-
 export default Dashboard
