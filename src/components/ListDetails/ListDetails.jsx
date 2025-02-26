@@ -1,7 +1,6 @@
 // src/components/ListDetails/ListDetails.jsx
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router';
-import { UserContext } from '../../contexts/UserContext';
 import * as listService from '../../services/listService';
 import * as itemService from '../../services/ItemService';
 
@@ -11,9 +10,9 @@ import deleteIcon from '../../assets/X ICON.png';
 import bgImage from '../../assets/INV_LIST1.jpg'
 
 
-const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
+const ListDetails = ({ handleDeleteItem }) => {
+  
   const { listId } = useParams();
-  const { user } = useContext(UserContext);
   const [list, setList] = useState(null);
 
 
@@ -35,8 +34,8 @@ const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
   if (!list) return <main>Loading...</main>;
 
   const handleCheck = async (itemData) => {
-   const updatedItem = await itemService.updateCheck(listId, itemData._id, itemData);
-   console.log(updatedItem)
+    await itemService.updateCheck(listId, itemData._id, itemData);
+   
   }
 
   const handleDeleteItemInternal = async (itemId) => {
@@ -52,63 +51,64 @@ const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
   };
 
   return (
-    <div className={styles.listpagebg} style={{ backgroundImage: `url(${bgImage})` }}> 
-    <main className={styles.listdetails}> 
-      <section>
-        <header>
-          <h1 className={styles.listheader}>{list.title}</h1>
-          <h3 className={styles.listsubheader}>{list.listType}</h3>
-          <div className={styles.listcontainer}>
-            <ul className={styles.listitems}>
-              {list.items.map((item) => (
-                <li key={item._id} className={styles.listitem}>
-                  <label>
-                    <input
-                      type="checkbox"
-                      className={styles.listitemcheckbox}
-                      checked={item.isPurchased}
-                      onClick={() => handleCheck(item)}
-                      onChange={() =>
-                        setList((prevList) => ({
-                          ...prevList,
-                          items: prevList.items.map((i) =>
-                            i._id === item._id
-                              ? { ...i, isPurchased: !i.isPurchased }
-                              : i
-                          ),
-                        }))
-                      }
-                    />
-                    {/* Display item name, quantity, and unit */}
-                    <span className={styles.listitemname}>{item.name}</span> - <span>{item.quantity}</span> <span className={styles.listitemunit}>{item.unit}</span>
-                  </label>
+    <div className={styles.listpagebg} style={{ backgroundImage: `url(${bgImage})` }}>
+      <main className={styles.listdetails}>
+        <section>
+          <header>
+            <h1 className={styles.listheader}>{list.title}</h1>
+            <h3 className={styles.listsubheader}>{list.listType}</h3>
+            <div className={styles.scrollContainer}>
+              <div className={styles.listcontainer}>
+                <ul className={styles.listitems}>
+                  {list.items.map((item) => (
+                    <li key={item._id} className={styles.listitem}>
+                      <label>
+                        <input
+                          type="checkbox"
+                          className={styles.listitemcheckbox}
+                          checked={item.isPurchased}
+                          onClick={() => handleCheck(item)}
+                          onChange={() =>
+                            setList((prevList) => ({
+                              ...prevList,
+                              items: prevList.items.map((i) =>
+                                i._id === item._id
+                                  ? { ...i, isPurchased: !i.isPurchased }
+                                  : i
+                              ),
+                            }))
+                          }
+                        />
+                        {/* Display item name, quantity, and unit */}
+                        <span className={styles.listitemname}>{item.name}</span> - <span>{item.quantity}</span> <span className={styles.listitemunit}>{item.unit}</span>
+                      </label>
 
-                  {/* Edit Item Button */}
-                  <div className={styles.listbuttons}>
-                  <Link to={`/lists/${listId}/items/edit/${item._id}`}>
-                   <img src={editIcon} alt="Edit" className={styles.editIcon}/>
-                  </Link>
+                      {/* Edit Item Button */}
+                      <div className={styles.listbuttons}>
+                        <Link to={`/lists/${listId}/items/edit/${item._id}`}>
+                          <img src={editIcon} alt="Edit" className={styles.editIcon} />
+                        </Link>
 
-                  {/* Delete Item Button */}
-                  <button type="button" onClick={() => handleDeleteItemInternal(item._id)} className={styles.deleteButton}>
-                      <img src={deleteIcon} alt="Delete" className={styles.deleteIcon} />
-                  </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-          
+                        {/* Delete Item Button */}
+                        <button type="button" onClick={() => handleDeleteItemInternal(item._id)} className={styles.deleteButton}>
+                          <img src={deleteIcon} alt="Delete" className={styles.deleteIcon} />
+                        </button>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
 
-          {/* Add Item Button */}
-          <Link to={`/lists/${listId}/items/add`}>
-            <button className={styles.additembutton}>Add Item</button>
-          </Link>
+            {/* Add Item Button */}
+            <Link to={`/lists/${listId}/items/add`}>
+              <button className={styles.additembutton}>Add Item</button>
+            </Link>
 
-          
-        </header>
-      </section>
-    </main>
+
+          </header>
+        </section>
+      </main>
     </div>
   );
 };

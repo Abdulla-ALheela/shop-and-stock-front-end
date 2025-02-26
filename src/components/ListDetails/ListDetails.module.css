@@ -21,6 +21,13 @@
 
 }
 
+.scrollContainer {
+  width: 500px;
+  height: 400px;
+  overflow-y: auto; 
+  overflow-x: hidden; 
+  padding: 10px;
+}
 
   .listheader {
     text-align: left;
