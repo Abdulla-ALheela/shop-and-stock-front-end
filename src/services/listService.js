@@ -11,7 +11,6 @@ const index = async () => {
     }
   };
 
- 
   const create = async (listFormData) => {
     try {
       const res = await fetch(BASE_URL, {
@@ -29,7 +28,6 @@ const index = async () => {
   }
 
   const show = async (listId) => {
-    console.log("ListService Show listID: " + listId);
     try {
       const res = await fetch(`${BASE_URL}/${listId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
@@ -54,8 +52,6 @@ const index = async () => {
       console.log(error);
     }
   };
-  
-
   
 
   const updateList = async (listId, updatedData) => {

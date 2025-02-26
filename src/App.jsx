@@ -20,6 +20,8 @@ const App = () => {
   const [lists, setLists] = useState([]);
   const [listAdded, setListAdded] = useState(false);
 
+  const navigate = useNavigate();
+
 
   // Fetch all lists
   useEffect(() => {
@@ -31,17 +33,17 @@ const App = () => {
     if (user) fetchAllLists();
   }, [user, listAdded]);
 
-  // Handle Add List
-  const navigate = useNavigate();
-
+  
+// Handle Add List
   const handleAddList = async (listFormData) => {
     const newList = await listService.create(listFormData);
     setLists([newList, ...lists]);
     setListAdded(true);
-    console.log(listFormData);
     listFormData.listType === "Purchase list" ? navigate('/lists/purchase'): navigate('/lists/inventory')
     
   };
+
+  // Handle Edit List
   const handleEditList = async (listId, updatedData) => {
     try {
       const updatedList = await listService.updateList(listId, updatedData);
@@ -54,8 +56,6 @@ const App = () => {
 
     updatedData.listType === "Purchase list" ? navigate('/lists/purchase'): navigate('/lists/inventory')
   };
-
-
 
 
   // Handle Delete List
@@ -116,21 +116,11 @@ const App = () => {
         <Route path="/lists/:listId/edit" element={<ListForm handleEditList={handleEditList} />} />
         <Route path='/lists/inventory' element={<InventoryLists lists={lists} handleDeleteList={handleDeleteList} />} />
         <Route path='/lists/purchase' element={<PurchaseLists lists={lists} handleDeleteList={handleDeleteList} />} />
-
-        <Route
-          path='/lists/:listId'
-          element={
-            <ListDetails
-              handleDeleteList={handleDeleteList}
-              handleDeleteItem={handleDeleteItem}
-              handleEditItem={handleEditItem}
-            />
-          }
-        />
+        <Route path='/lists/:listId'element={ <ListDetails handleDeleteItem={handleDeleteItem} />}/>
         <Route path="/lists/:listId/edit" element={<ListForm />} />
-
         <Route path='/lists/:listId/items/add' element={<AddItemForm />} />
-        <Route path='/lists/:listId/items/edit/:itemId' element={<ItemEditForm handleEditItem={handleEditItem} />} /> {/* Fixed props */}
+        <Route path='/lists/:listId/items/edit/:itemId' element={<ItemEditForm handleEditItem={handleEditItem} />} />
+
       </Routes>
     </>
   );

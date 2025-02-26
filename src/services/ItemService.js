@@ -50,8 +50,6 @@ const updateItem = async (listId, itemId, itemData) => {
       body: JSON.stringify(itemData),
     });
 
-    
-
 
     return res.json();
   } catch (error) {
@@ -73,8 +71,6 @@ const updateCheck = async (listId, itemId, itemData) => {
       });
   
       
-  
-  
       return res.json();
     } catch (error) {
       console.log('Error adding item:', error);
@@ -82,8 +78,7 @@ const updateCheck = async (listId, itemId, itemData) => {
     }
   };
 
-
-
+  
 const deleteItem = async (listId, itemId) => {
   try {
     const res = await fetch(`${BASE_URL}/${listId}/items/${itemId}`, {
