@@ -2,7 +2,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router';
 import * as itemService from '../../services/ItemService';
+
 import "../EditItemForm/EditItemForm.css"
+import bgImage from '../../assets/NEW_EDITITEM.jpg'
 
 
 
@@ -18,9 +20,8 @@ const ItemEditForm = () => {
     isPurchased: false,
   });
 
-  // Fetch item data on component mount
+
   useEffect(() => {
-    console.log('Fetching item with ID:', itemId);
     const fetchItem = async () => {
       try {
         const item = await itemService.showItem(listId, itemId);
@@ -34,18 +35,29 @@ const ItemEditForm = () => {
 
 
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await itemService.updateItem(listId, itemId, itemData);
+      const res = await itemService.updateItem(listId, itemId, itemData);
+      if (!res) {
+        throw new Error('Failed to update item');
+      }
+
       navigate(`/lists/${listId}`);
     } catch (error) {
       console.error('Error updating item:', error);
+  
+      if (error.response) {
+        const errorText = await error.response.text();
+        console.error('Error response:', errorText);
+      }
     }
   };
+  
 
   return (
+    <div className="bgImage" style={{backgroundImage: `url(${bgImage})`}}>
+    
     <main className="edit-item-form-main">
       <form onSubmit={handleSubmit}>
         <h1 className="edit-item-form-title">Edit Item</h1>
@@ -76,7 +88,7 @@ const ItemEditForm = () => {
 
         <label className="edit-item-form-label" htmlFor='unit'>Unit </label>
         <select
-         className="edit-item-form-input"
+         className="edit-item-form-inpu2"
           required
           name='unit'
           id='unit'
@@ -96,6 +108,7 @@ const ItemEditForm = () => {
         <button className="edit-item-submit-button" type="submit">Save Changes</button>
       </form>
     </main>
+    </div>
   );
 };
 

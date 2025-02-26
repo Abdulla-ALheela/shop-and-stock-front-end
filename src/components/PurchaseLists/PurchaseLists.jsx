@@ -41,7 +41,13 @@ const PurchaseLists = (props) => {
         <p className={styles.noListsMessage}>No purchase lists available</p>
       )}
 
+      <Link to='/lists/new'>
+        <button className={styles.addlistbutton}>Add List</button>
+      </Link>
       </div>
+      {/* Add List Button */}
+
+
     </main>
   );
 };

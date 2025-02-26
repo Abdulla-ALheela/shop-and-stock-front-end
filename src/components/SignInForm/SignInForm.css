@@ -1,10 +1,10 @@
 .signinupbg{
     background-size: cover; 
     background-repeat: no-repeat;
-    background-attachment: fixed;
     width: 100vw;
     height: 100vh;
 }
+
 .sign-in-card {
     background-color: black;
     padding: 30px;
@@ -13,7 +13,7 @@
     border-radius: 15px;
     position: absolute !important;
     right:38%;
-    top: 25%;
+    top: 12%;
 
     
 
@@ -26,17 +26,20 @@
 .sign-in-label {
     display: block;
     color: white;
-    font-size: 14px;
-    text-align: left ;
-    margin-bottom: 5px ;
-    font-weight: bold;
+    font-size: 18px;
+    font-weight: 450;
+    text-align: left;
+    margin-bottom: 5px;
 }
 
 .sign-in-input {
-    width: 95%;
+    width: 93%;
+    font-size: 18px;
+    font-weight: 350;
     padding: 10px;
+    padding-bottom: 15px;
     border: 1px solid white;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: black;
     color: white;
     outline: none;
@@ -46,21 +49,25 @@
 
 .sign-in-button {
     width: 60%;
-    padding: 10px;
-    background-color: #0068FF;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    font-weight: bold;
+    background: #0068FF;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 40px;
+    margin-top: 10px;
+    border-radius: 50px;
     cursor: pointer;
-    margin-bottom: 5px;
+    font-weight: 450;
+    transition: background 0.3s;
 }
 
 .sign-in-button:hover {
-    background-color: #0460eae3;
+    background: #0068FF;
+    font-weight:600;
+    color: #ffffff;
 }
 
 .sign-in-text {
+    padding-top: 5px;
     color: white;
     font-size: 14px;
     margin-top: 10px;
@@ -73,5 +80,5 @@
 }
 
 .sign-in-link:hover {
-    text-decoration: underline;
+    color: #0068FF;
 }

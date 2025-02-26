@@ -21,6 +21,9 @@
     font-weight: bold;
     margin-bottom: 40px;
     margin-left: 40px;
+    color: #ffffff;
+    
+
 }
 
 .purchaseGrid {
@@ -117,4 +120,22 @@
     font-weight: bold;
     color: white;
     margin-top: 20px;
+}
+
+.addlistbutton{
+    background: #0068FF;
+    color: #fff;
+    font-size: 16px;
+    padding: 10px 40px;
+    margin-top: 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.addlistbutton:hover{
+    background: #0068FF;
+    border: 1px solid #0068FF;
+    font-weight:600;
+    color: #ffffff;
 }

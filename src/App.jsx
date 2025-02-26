@@ -14,10 +14,12 @@ import ItemEditForm from './components/EditItemForm/EditItemForm';
 import * as itemService from './services/ItemService';
 import AddItemForm from './components/AddItemForm/AddItemForm';
 
+
 const App = () => {
   const { user } = useContext(UserContext);
   const [lists, setLists] = useState([]);
   const [listAdded, setListAdded] = useState(false);
+
 
   // Fetch all lists
   useEffect(() => {
@@ -49,7 +51,12 @@ const App = () => {
     } catch (error) {
       console.error("Error editing list:", error);
     }
+
+    updatedData.listType === "Purchase list" ? navigate('/lists/purchase'): navigate('/lists/inventory')
   };
+
+
+
 
   // Handle Delete List
   const handleDeleteList = async (listId) => {
@@ -109,6 +116,7 @@ const App = () => {
         <Route path="/lists/:listId/edit" element={<ListForm handleEditList={handleEditList} />} />
         <Route path='/lists/inventory' element={<InventoryLists lists={lists} handleDeleteList={handleDeleteList} />} />
         <Route path='/lists/purchase' element={<PurchaseLists lists={lists} handleDeleteList={handleDeleteList} />} />
+
         <Route
           path='/lists/:listId'
           element={

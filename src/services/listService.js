@@ -34,7 +34,7 @@ const index = async () => {
       const res = await fetch(`${BASE_URL}/${listId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       });
-      return res.json(); 
+      return res.json();
     } catch (error) {
       console.log(error);
     }
@@ -54,6 +54,9 @@ const index = async () => {
       console.log(error);
     }
   };
+  
+
+  
 
   const updateList = async (listId, updatedData) => {
     try {
@@ -77,11 +80,11 @@ const index = async () => {
   };
   
 
-  export { 
+  export {
     index,
     create,
     show,
     deleteList,
-    updateList 
+    updateList
   };
   

@@ -8,7 +8,7 @@ import * as itemService from '../../services/ItemService';
 import styles from './ListDetails.module.css'
 import editIcon from '../../assets/EDIT ICON.png';
 import deleteIcon from '../../assets/X ICON.png';
-import bgImage from '../../assets/NEW_EDITITEM.jpg'
+import bgImage from '../../assets/INV_LIST1.jpg'
 
 
 const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
@@ -19,7 +19,6 @@ const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
 
   useEffect(() => {
     const fetchList = async () => {
-      console.log('Fetching list with listId:', listId);
       try {
         const listData = await listService.show(listId);
         setList(listData);
@@ -36,7 +35,8 @@ const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
   if (!list) return <main>Loading...</main>;
 
   const handleCheck = async (itemData) => {
-   await itemService.updateItem(listId, itemData._id, itemData);
+   const updatedItem = await itemService.updateCheck(listId, itemData._id, itemData);
+   console.log(updatedItem)
   }
 
   const handleDeleteItemInternal = async (itemId) => {
@@ -80,7 +80,7 @@ const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
                       }
                     />
                     {/* Display item name, quantity, and unit */}
-                    <span className={styles.listitemname}>{item.name}</span> - <span>{item.quantity}</span> <span>{item.unit}</span>
+                    <span className={styles.listitemname}>{item.name}</span> - <span>{item.quantity}</span> <span className={styles.listitemunit}>{item.unit}</span>
                   </label>
 
                   {/* Edit Item Button */}

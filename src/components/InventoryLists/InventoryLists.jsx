@@ -9,7 +9,7 @@ import bgImage from '../../assets/INV + PUR MAIN LIST.jpg'
 
 
 const InventoryLists = (props) => {
-  const { user } = useContext(UserContext); 
+  const { user } = useContext(UserContext);
   return (
     
     <main className={styles.inventoryPage} style={{ backgroundImage: `url(${bgImage})` }}> 
@@ -29,7 +29,7 @@ const InventoryLists = (props) => {
             <img src={editIcon} alt="Edit" className={styles.editIcon}/>
             </Link>
             <button onClick={() => props.handleDeleteList(list._id)} className={styles.deleteButton}>
-            <img src={deleteIcon} alt="Delete" className={styles.deleteIcon} />
+            <img src={deleteIcon} alt="Delete List" className={styles.deleteIcon} />
 </button>
  </div>
 
@@ -39,9 +39,16 @@ const InventoryLists = (props) => {
       
       {props.lists.filter(list => list.listType === "Inventory" && list.owner._id === user._id).length === 0 && (
         <p className={styles.noListsMessage}>No inventory lists available</p>
+        
       )}
-      
+
+      {/* Add List Button */}
+      <Link to='/lists/new'> 
+      <button className={styles.addlistbutton}>Add List</button> 
+      </Link>
       </div>
+
+      
     </main>
   );
 };

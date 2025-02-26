@@ -119,3 +119,20 @@
     color: white;
     margin-top: 20px;
 }
+
+.addlistbutton{
+    background: #0068FF;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 10px 40px;
+    margin-top: 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.addlistbutton:hover{
+    background: #0068FF;
+    font-weight:600;
+    color: #ffffff;
+}
