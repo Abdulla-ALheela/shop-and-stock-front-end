@@ -8,7 +8,7 @@
 > We created **Shop & Stock** because we believe it offers a practical solution for users who want to stay organized. By providing an easy way to create shopping lists and inventory records, the app helps streamline day-to-day shopping and household management.
 
 
-![Screenshot from game](https://i.postimg.cc/V60gk1Z4/Project-3-image.png)  
+![Screenshot from game](./src/assets/Shop&Stock.png)
 
 ----------
 

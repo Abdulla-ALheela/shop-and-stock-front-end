@@ -5,6 +5,9 @@ import { useNavigate, useParams } from 'react-router';
 import * as itemService from '../../services/ItemService';
 
 import "../AddItemForm/AddItemForm.css"
+import bgImage from '../../assets/NEW_EDITITEM.jpg'
+
+
 const AddItemForm = () => {
   const { listId } = useParams();
   const navigate = useNavigate();
@@ -27,7 +30,7 @@ const AddItemForm = () => {
   };
 
   return (
-
+<div className="bgImage" style={{backgroundImage: `url(${bgImage})`}}>
     <main className="item-form-main">
       <form onSubmit={handleSubmit}>
 
@@ -60,7 +63,7 @@ const AddItemForm = () => {
           required
           name='unit'
           id='unit'
-          className="item-form-input"
+          className="item-form-input2"
           value={itemData.unit}
           onChange={(e) => setItemData({ ...itemData, unit: e.target.value })}
         >
@@ -76,6 +79,7 @@ const AddItemForm = () => {
         <button className="submit-button" type="submit">Add Item</button>
       </form>
     </main>
+    </div>
   );
 };
 

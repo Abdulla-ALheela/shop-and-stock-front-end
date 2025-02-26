@@ -1,0 +1,162 @@
+.listpagebg{
+  background-size: cover; 
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+}
+
+.listdetails {
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 350px; 
+    max-width: 350px;
+    min-width: 280px;
+    padding: 20px; 
+    position: absolute;
+    left: 43px;
+    top: 95px;
+    border-radius: 8px;
+
+}
+
+
+  .listheader {
+    text-align: left;
+    font-size: 60px;
+    font-weight: bold;
+    margin-bottom: 0px;
+  }
+  
+  .listsubheader {
+    text-align: left;
+    font-size: 25px;
+    font-weight:450;
+    font-weight: normal;
+    color: #ccc;
+    margin-top: 5%;
+    margin-bottom: 25px;
+  }
+  
+
+.listcontainer {
+    width: 180%;
+    max-width: 400px; 
+}
+  
+
+  .listitems {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .listitems li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid #333;
+    font-size: 20px;
+    font-weight:350;
+  }
+  
+
+ 
+.listitemcheckbox {
+      appearance: none;
+      width: 30px;
+      height: 30px;
+      border: 1px solid #fff;
+      border-radius: 50%;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      vertical-align: middle;
+      position: relative;
+      top: 1px;
+    }
+
+.listitemcheckbox:checked {
+    background-color: #0068FF; 
+    border-color: #0068FF;
+    background-image: url('../../assets/Tick.png');
+    background-size: 65%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+  
+.listitemname {
+    flex-grow: 1;
+    font-size: 20px;
+    font-weight:450;
+    color: #fff;
+
+  }
+
+
+  .listbuttons {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .editIcon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.editIcon:hover {
+    content: url('../../assets/EDIT HOVER ICON.png');
+    transform: scale(1.1);
+}
+  
+  .listbuttons button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .deleteButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.deleteButton img {
+    width: 20px; 
+    height: 20px;
+
+    
+}
+
+.deleteButton:hover img {
+    content: url('../../assets/X ICON HOVER.png');
+    transform: scale(1.2);
+}
+  
+  .additembutton {
+    background: #0068FF;
+    color: #ffffff;
+    font-size: 16px;
+    padding: 10px 40px;
+    margin-top: 10px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .additembutton:hover {
+    background: #0068FF;
+    font-weight:600;
+    color: #ffffff;
+  }
+  

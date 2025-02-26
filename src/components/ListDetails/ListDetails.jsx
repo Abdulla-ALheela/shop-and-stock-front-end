@@ -5,10 +5,17 @@ import { UserContext } from '../../contexts/UserContext';
 import * as listService from '../../services/listService';
 import * as itemService from '../../services/ItemService';
 
+import styles from './ListDetails.module.css'
+import editIcon from '../../assets/EDIT ICON.png';
+import deleteIcon from '../../assets/X ICON.png';
+import bgImage from '../../assets/INV_LIST1.jpg'
+
+
 const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
   const { listId } = useParams();
   const { user } = useContext(UserContext);
   const [list, setList] = useState(null);
+
 
   useEffect(() => {
     const fetchList = async () => {
@@ -45,18 +52,20 @@ const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
   };
 
   return (
-    <main>
+    <div className={styles.listpagebg} style={{ backgroundImage: `url(${bgImage})` }}> 
+    <main className={styles.listdetails}> 
       <section>
         <header>
-          <h1>{list.title}</h1>
-          <h3>{list.listType}</h3>
-          <div>
-            <ul>
+          <h1 className={styles.listheader}>{list.title}</h1>
+          <h3 className={styles.listsubheader}>{list.listType}</h3>
+          <div className={styles.listcontainer}>
+            <ul className={styles.listitems}>
               {list.items.map((item) => (
-                <li key={item._id}>
+                <li key={item._id} className={styles.listitem}>
                   <label>
                     <input
                       type="checkbox"
+                      className={styles.listitemcheckbox}
                       checked={item.isPurchased}
                       onClick={() => handleCheck(item)}
                       onChange={() =>
@@ -71,29 +80,36 @@ const ListDetails = ({ handleDeleteList, handleDeleteItem }) => {
                       }
                     />
                     {/* Display item name, quantity, and unit */}
-                    <span>{item.name}</span> - <span>{item.quantity}</span> <span>{item.unit}</span>
+                    <span className={styles.listitemname}>{item.name}</span> - <span>{item.quantity}</span> <span className={styles.listitemunit}>{item.unit}</span>
                   </label>
 
                   {/* Edit Item Button */}
+                  <div className={styles.listbuttons}>
                   <Link to={`/lists/${listId}/items/edit/${item._id}`}>
-                      <button>Edit Item</button>
-                    </Link>
+                   <img src={editIcon} alt="Edit" className={styles.editIcon}/>
+                  </Link>
 
-                {/* Delete Item Button */}
-                <button onClick={() => handleDeleteItemInternal(item._id)}>Delete Item</button>
-
+                  {/* Delete Item Button */}
+                  <button type="button" onClick={() => handleDeleteItemInternal(item._id)} className={styles.deleteButton}>
+                      <img src={deleteIcon} alt="Delete" className={styles.deleteIcon} />
+                  </button>
+                  </div>
                 </li>
               ))}
             </ul>
           </div>
+          
 
           {/* Add Item Button */}
           <Link to={`/lists/${listId}/items/add`}>
-            <button>Add Item</button>
+            <button className={styles.additembutton}>Add Item</button>
           </Link>
+
+          
         </header>
       </section>
     </main>
+    </div>
   );
 };
 
